@@ -105,5 +105,7 @@ export default async function main() {
 	appStatuses = await getFaked()
 	// appStatuses = await getReal()
 
+	appStatuses = { api: appStatuses.api } // one app only, forgot to tell the designer i have multiple apps...
+
 	React.render(<Root lists={appStatuses} />, document.getElementById('main'))
 }
