@@ -4,6 +4,40 @@ import { getFaked, getReal } from './api'
 
 const map = (obj, fn) => Object.keys(obj).map((key, i) => fn(obj[key], key, i))
 
+const COLOURS = new Map([
+	['g', 'green'],
+	['a', 'orange'],
+	['r', 'red'],
+])
+
+class Root extends Component {
+	render() {
+		/**
+		 * {
+		 * 	api: {
+		 * 		'2015-08-26': [
+		 * 			{ status: 'r', time: '22:29', message: '**ARGH!!** Fuck it all...' },
+		 * 			{ status: 'g', time: '22:20', message: 'All good now' },
+		 * 		]
+		 * 	},
+		 * 	web: {
+		 * 		'2015-08-26': [
+		 * 			{ status: 'g', time: '00:00', message: 'All good' },
+		 * 		]
+		 * 	}
+		 * }
+		 */
+		const { lists } = this.props
+		return (
+			<div>
+				{map(lists, (statuses, appName, i) => (
+					<AppStatuses key={i} name={appName} statuses={lists[appName]} />
+				))}
+			</div>
+		)
+	}
+}
+
 class AppStatuses extends Component {
 	render() {
 		const { name, statuses } = this.props
@@ -11,33 +45,20 @@ class AppStatuses extends Component {
 			<div>
 				<h3>{name}</h3>
 				{map(statuses, (statuses, date, i) => (
-					<DatedStatuses key={i} date={date} statuses={statuses} />
+					<DatedList key={i} date={date} statuses={statuses} />
 				))}
 			</div>
 		)
 	}
 }
 
-class DatedStatuses extends Component {
+class DatedList extends Component {
 	render() {
 		const { date, statuses } = this.props
 		return (
 			<div>
 				<h4>{date}</h4>
 				<List list={statuses} />
-			</div>
-		)
-	}
-}
-
-class App extends Component {
-	render() {
-		const { lists } = this.props
-		return (
-			<div>
-				{map(lists, (statuses, appName, i) => (
-					<AppStatuses key={i} name={appName} statuses={lists[appName]} />
-				))}
 			</div>
 		)
 	}
@@ -55,15 +76,13 @@ class List extends Component {
 	}
 }
 
-const COLOURS = new Map([
-	['g', 'green'],
-	['a', 'orange'],
-	['r', 'red'],
-])
-
 class Item extends Component {
 	render() {
-		return <li className="status-item" style={{ color: COLOURS.get(this.props.status) }}>{this.props.time} <Markdown content={this.props.message} /></li>
+		return (
+			<li className="status-item" style={{ color: COLOURS.get(this.props.status) }}>
+				{this.props.time} <Markdown content={this.props.message} />
+			</li>
+		)
 	}
 }
 
@@ -78,5 +97,5 @@ export default async function main() {
 	appStatuses = await getFaked()
 	// appStatuses = await getReal()
 
-	React.render(<App lists={appStatuses} />, document.getElementById('main'))
+	React.render(<Root lists={appStatuses} />, document.getElementById('main'))
 }
