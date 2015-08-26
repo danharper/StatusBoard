@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import R from 'ramda'
 import md2html from './md2html'
 import { getFaked, getReal } from './api'
 
@@ -79,11 +78,5 @@ export default async function main() {
 	appStatuses = await getFaked()
 	// appStatuses = await getReal()
 
-	const groupedLists = appStatuses.reduce((carry, [app, statuses]) => {
-		carry[app] = R.groupBy(s => s.date, statuses)
-		return carry
-	}, {})
-
-	React.render(<App lists={groupedLists} />, document.getElementById('main'))
-
+	React.render(<App lists={appStatuses} />, document.getElementById('main'))
 }

@@ -1,3 +1,4 @@
+import R from 'ramda'
 const GITHUB_API = 'https://api.github.com'
 const REPO = 'danharper/status'
 
@@ -12,6 +13,11 @@ const api = async path => {
 	return await response.json()
 }
 
+const groupedLists = appStatuses => appStatuses.reduce((carry, [app, statuses]) => {
+	carry[app] = R.groupBy(s => s.date, statuses)
+	return carry
+}, {})
+
 const parseText = text => {
 	return {
 		status: text.substr(0, 1),
@@ -21,7 +27,7 @@ const parseText = text => {
 	}
 }
 
-export const getFaked = async () => [
+export const getFaked = async () => groupedLists([
 	['api', [
 		parseText("g 2015-08-26T00:00 No known issues"),
 		parseText("a 2015-08-25T13:04 Ok, slowly coming back online.."),
@@ -33,7 +39,7 @@ export const getFaked = async () => [
 		parseText("r 2015-08-26 18:29 Oops, unplugged the wrong cable! Waiting for the building to power cycle..."),
 		parseText("a 2015-08-26 18:23 **Investigating** Having some issues with something!"),
 	]],
-]
+])
 
 const parseContent = content => atob(content)
 	.split('\n')
@@ -64,5 +70,5 @@ export const getReal = async () => {
 
 	console.log(all)
 
-	return all
+	return groupedLists(all)
 }
