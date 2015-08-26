@@ -110,8 +110,8 @@ class Markdown extends Component {
 }
 
 export default async function main() {
-	const appStatuses = await getReal()
-	// const appStatuses = await getFaked()
+	const appStatuses = await getFaked()
+	// const appStatuses = await getReal()
 
 	// const x = await api('statuses')
 
