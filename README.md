@@ -24,6 +24,8 @@ Then the datetime in ISO8601 format. Followed by the message. The message suppor
 
 I mentioned there's one file per "app" to report the status of. I've told you this, but I forgot to tell Ed this until he had designed it... 😬 So the app only shows the report of one app (for now?)
 
+It'd be cool to have a Slack integration so `/status r Ah fuck` would hit a script on your server which would add the line (with the current date) to the file for you.
+
 > **NOTE** The current live preview is serving up a hard-coded list, but the API integration is fully operational. Just uncomment the call to `await getReal()` in `src/init.js`
 
 #### Development
