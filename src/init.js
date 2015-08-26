@@ -38,18 +38,35 @@ class Root extends Component {
 	}
 }
 
+const mostRecentStatus = datedStatuses => {
+	const mostRecentDate = Object.keys(datedStatuses).reduce((carry, date) => date > carry ? date : carry, '')
+	return datedStatuses[mostRecentDate][0]
+}
+
 class AppStatuses extends Component {
 	render() {
 		const { name, statuses } = this.props
 		return (
 			<div>
-				<h3>{name}</h3>
+				<AppName name={name} currentStatus={mostRecentStatus(statuses)} />
 				{map(statuses, (statuses, date, i) => (
 					<div>
 						<h4>{date}</h4>
 						<List key={i} list={statuses} />
 					</div>
 				))}
+			</div>
+		)
+	}
+}
+
+class AppName extends Component {
+	render() {
+		const { name, currentStatus } = this.props
+		return (
+			<div style={{ color: COLOURS.get(currentStatus.status) }}>
+				<h1>{name}</h1>
+				<h2><Markdown content={currentStatus.message} /></h2>
 			</div>
 		)
 	}
