@@ -29,15 +29,24 @@ const parseText = text => {
 
 export const getFaked = async () => groupedLists([
 	['api', [
-		parseText("g 2015-08-26T00:00 No known issues"),
+		parseText("g 2015-08-27T00:00 All systems are GO!"),
+		parseText("g 2015-08-26T18:55 We're back! So sorry!!"),
+		parseText("r 2015-08-26T18:29 Oops, unplugged the wrong cable! Waiting for the building to power cycle..."),
+		parseText("a 2015-08-26T18:23 **Investigating** Having some issues with something! We think it's a DDOS, those darn [cyber criminals](http://www.smeadvisor.com/wp-content/uploads/2012/08/cyber-crime.jpg)!"),
+		parseText("g 2015-08-25T13:12 That was embarassing. Well, I guess you don't learn until you press `Terminate` in AWS 😆 💩"),
 		parseText("a 2015-08-25T13:04 Ok, slowly coming back online.."),
 		parseText("r 2015-08-25T13:01 Ah, so _that's_ what a load balancer's for!"),
-		parseText("g 2015-08-25T00:00 Celebrating 10 days without downtime :D"),
+		parseText("g 2015-08-25T00:00 Celebrating 3 days without downtime :D"),
+		parseText("g 2015-08-24T00:00 Fully Operational"),
+		parseText("g 2015-08-23T00:00 Fully Operational"),
+		parseText("g 2015-08-22T00:00 Fully Operational"),
+		parseText("g 2015-08-21T17:20 Normal running has resumed"),
+		parseText("a 2015-08-21T16:20 I swear I look away for _one_ second!"),
 	]],
 	['web', [
-		parseText("g 2015-08-26 18:55 We're back! So sorry!!"),
-		parseText("r 2015-08-26 18:29 Oops, unplugged the wrong cable! Waiting for the building to power cycle..."),
-		parseText("a 2015-08-26 18:23 **Investigating** Having some issues with something!"),
+		parseText("g 2015-08-26T18:55 We're back! So sorry!!"),
+		parseText("r 2015-08-26T18:29 Oops, unplugged the wrong cable! Waiting for the building to power cycle..."),
+		parseText("a 2015-08-26T18:23 **Investigating** Having some issues with something!"),
 	]],
 ])
 

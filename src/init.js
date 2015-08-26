@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import md2html from './md2html'
 import { getFaked, getReal } from './api'
+import { english as ordinal } from 'ordinal'
+import months from 'months'
 
 const map = (obj, fn) => Object.keys(obj).map((key, i) => fn(obj[key], key, i))
 
@@ -49,24 +51,50 @@ class AppStatuses extends Component {
 		return (
 			<div>
 				<AppName name={name} currentStatus={mostRecentStatus(statuses)} />
-				{map(statuses, (statuses, date, i) => (
-					<div>
-						<h4>{date}</h4>
-						<List key={i} list={statuses} />
-					</div>
-				))}
+				<div className="status__wrapper">
+					{map(statuses, (statuses, date, i) => (
+						<div className="date">
+							<h1 className="date__title"><NiceDate date={date} /></h1>
+							<List key={i} list={statuses} />
+						</div>
+					))}
+				</div>
 			</div>
 		)
 	}
 }
 
+class NiceDate extends Component {
+	render() {
+		const date = new Date(this.props.date)
+		return (
+			<span>{months[date.getMonth()]} {ordinal(date.getDate())}, {date.getFullYear()}</span>
+		)
+	}
+}
+
+const STATUS_CLASSES = new Map([
+	['g', 'status--good'],
+	['a', 'status--minor'],
+	['r', 'status--major'],
+])
+
+const statusClass = ({status}, yourClass = '') => yourClass + ' ' + STATUS_CLASSES.get(status)
+
+const STATUS_HERO_MESSAGES = new Map([
+	['g', 'All Systems Operational'],
+	['a', 'Minor System Outage'],
+	['r', 'Major System Outage'],
+])
+
+const statusMessage = ({status}) => STATUS_HERO_MESSAGES.get(status)
+
 class AppName extends Component {
 	render() {
 		const { name, currentStatus } = this.props
 		return (
-			<div style={{ color: COLOURS.get(currentStatus.status) }}>
-				<h1>{name}</h1>
-				<h2><Markdown content={currentStatus.message} /></h2>
+			<div className={statusClass(currentStatus, 'status__hero')}>
+				{statusMessage(currentStatus)}
 			</div>
 		)
 	}
@@ -75,9 +103,9 @@ class AppName extends Component {
 class List extends Component {
 	render() {
 		return (
-			<ul>
-				{this.props.list.map(({status, time, message}, i) => (
-					<Item key={i} status={status} time={time} message={message} />
+			<ul className="status__list">
+				{this.props.list.map((status, i) => (
+					<Item key={i} status={status} />
 				))}
 			</ul>
 		)
@@ -86,9 +114,15 @@ class List extends Component {
 
 class Item extends Component {
 	render() {
+		const { status } = this.props
 		return (
-			<li className="status-item" style={{ color: COLOURS.get(this.props.status) }}>
-				{this.props.time} <Markdown content={this.props.message} />
+			<li className={statusClass(status, 'status__list__item')}>
+				<div className="item__timestamp">
+					<div className="item__timestamp__slug">{status.time}</div>
+				</div>
+				<div className="item__message">
+					<Markdown content={status.message} />
+				</div>
 			</li>
 		)
 	}

@@ -19,6 +19,8 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.20",
     "commonmark": "npm:commonmark@0.22.0",
     "core-js": "npm:core-js@1.1.1",
+    "months": "npm:months@1.0.0",
+    "ordinal": "npm:ordinal@0.0.2",
     "ramda": "npm:ramda@0.17.1",
     "react": "npm:react@0.13.3",
     "github:jspm/nodelibs-buffer@0.1.0": {

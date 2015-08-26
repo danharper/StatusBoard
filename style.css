@@ -1,0 +1,109 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family:"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	background-color: #F0F0F0;
+}
+
+*,
+*:before,
+*:after {	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+
+.status__wrapper {
+	max-width: 640px;
+	margin: 0 auto;	
+}
+
+.status__hero {
+	text-align: center;
+	font-size: 32px;
+	font-weight: 300;
+	padding: 80px 0;
+	margin: 0;
+	color: white;
+	background-color: #CCC;
+}
+
+.date {
+	background-color: white;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	margin: 40px 0;
+}
+
+.status__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.status__list__item {	
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.status__list__item:after {
+	clear: both;
+	content: "";
+	display: table;
+}
+
+.date__title {
+	font-size: 16px;
+	background-color: #263238;
+	color: white;
+	font-weight: 300;
+	padding: 20px;
+	margin: 0;
+	border-radius: 4px 4px 0 0;
+}
+
+.item__timestamp {
+	float: left;
+	width: 14%;
+	padding: 20px 0 0 20px;
+}
+
+.item__timestamp__slug {
+	display: inline-block;
+	font-size: 10px;
+	background-color: #263238;
+	padding: 4px 8px;
+	line-height: 1;
+	border-radius: 2px;
+	color: white;
+	font-weight: 300;
+	margin-top: 3px;
+}
+
+.item__message {
+	float: left;
+	width: 80%;	
+	line-height: 1.5;
+	padding: 20px;
+	font-size: 14px;
+}
+
+.item__message a {
+	color: currentColor;
+}
+
+
+
+
+/* Statuses */
+
+.status--good .item__message  { color: #5FBF60; }
+.status--minor .item__message { color: #F3B26B; }
+.status--major .item__message { color: #E24C4C; }
+
+.status--good.status__hero  { background-color: #5FBF60; }
+.status--minor.status__hero { background-color: #F3B26B; }
+.status--major.status__hero { background-color: #E24C4C; }
