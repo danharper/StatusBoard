@@ -3,28 +3,42 @@ import R from 'ramda'
 import md2html from './md2html'
 import { getFaked, getReal } from './api'
 
+const map = (obj, fn) => Object.keys(obj).map((key, i) => fn(obj[key], key, i))
+
+class AppStatuses extends Component {
+	render() {
+		const { name, statuses } = this.props
+		return (
+			<div>
+				<h3>{name}</h3>
+				{map(statuses, (statuses, date, i) => (
+					<DatedStatuses key={i} date={date} statuses={statuses} />
+				))}
+			</div>
+		)
+	}
+}
+
+class DatedStatuses extends Component {
+	render() {
+		const { date, statuses } = this.props
+		return (
+			<div>
+				<h4>{date}</h4>
+				<List list={statuses} />
+			</div>
+		)
+	}
+}
+
 class App extends Component {
 	render() {
 		const { lists } = this.props
 		return (
 			<div>
-				{Object.keys(lists).map((appName, i) => {
-					const statusesByDate = lists[appName]
-					return (
-						<div key={i}>
-							<h3>{appName}</h3>
-							{Object.keys(statusesByDate).map((date, i) => {
-								const statuses = statusesByDate[date]
-								return (
-									<div key={i}>
-										<h4>{date}</h4>
-										<List list={statuses} />
-									</div>
-								)
-							})}
-						</div>
-					)
-				})}
+				{map(lists, (statuses, appName, i) => (
+					<AppStatuses key={i} name={appName} statuses={lists[appName]} />
+				))}
 			</div>
 		)
 	}
