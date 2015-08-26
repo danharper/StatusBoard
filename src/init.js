@@ -53,7 +53,7 @@ class AppStatuses extends Component {
 				<AppName name={name} currentStatus={mostRecentStatus(statuses)} />
 				<div className="status__wrapper">
 					{map(statuses, (statuses, date, i) => (
-						<div className="date">
+						<div className="date" key={i}>
 							<h1 className="date__title"><NiceDate date={date} /></h1>
 							<List key={i} list={statuses} />
 						</div>
