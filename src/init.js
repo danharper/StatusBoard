@@ -45,20 +45,11 @@ class AppStatuses extends Component {
 			<div>
 				<h3>{name}</h3>
 				{map(statuses, (statuses, date, i) => (
-					<DatedList key={i} date={date} statuses={statuses} />
+					<div>
+						<h4>{date}</h4>
+						<List key={i} list={statuses} />
+					</div>
 				))}
-			</div>
-		)
-	}
-}
-
-class DatedList extends Component {
-	render() {
-		const { date, statuses } = this.props
-		return (
-			<div>
-				<h4>{date}</h4>
-				<List list={statuses} />
 			</div>
 		)
 	}
