@@ -12,6 +12,7 @@
     "directories": {},
     "dependencies": {
       "commonmark": "npm:commonmark@^0.22.0",
+      "ramda": "npm:ramda@^0.17.1",
       "react": "npm:react@^0.13.3"
     },
     "devDependencies": {
