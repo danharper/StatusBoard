@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>StatusBoard</title>
+	<style>
+		.status-item .contains-markdown > p {
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<main id="main"></main>
+	<script src="jspm_packages/system.js"></script>
+	<script src="config.js"></script>
+	<script>
+		System.import('src/index').catch(console.error.bind(console));
+	</script>
+</body>
+</html>
