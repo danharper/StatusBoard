@@ -2,7 +2,7 @@
 
 Built by [@danharper7](https://twitter.com/danharper7), designed by [@_ewp](http://twitter.com/_ewp)
 
-Keep your status messages in a public GitHub repo, as text files. One text file per app. Then this web app will fetch and display them.
+Keep your status reports in a public GitHub repo, as text files. One text file per app. Then this web app will fetch and display them. So to add a report, just edit a file through the GitHub web UI (or, manually through git).
 
 ![Preview](https://i.imgur.com/pktRvSa.png)
 
